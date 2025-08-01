@@ -189,7 +189,7 @@ const Guest = () => {
                 <div className='flex items-center gap-3 mb-4'>
                   <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-500 via-green-500 to-teal-500 rounded-full flex items-center justify-center shadow-lg'>
                     <span className='text-white text-xs sm:text-sm font-bold'>
-                      S
+                      Y
                     </span>
                   </div>
                   <div>
@@ -218,7 +218,7 @@ const Guest = () => {
                 <div className='flex items-center gap-3 mb-4'>
                   <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 via-teal-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg'>
                     <span className='text-white text-xs sm:text-sm font-bold'>
-                      J
+                      N
                     </span>
                   </div>
                   <div>
@@ -247,7 +247,7 @@ const Guest = () => {
                 <div className='flex items-center gap-3 mb-4'>
                   <div className='w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-teal-500 via-emerald-500 to-green-500 rounded-full flex items-center justify-center shadow-lg'>
                     <span className='text-white text-xs sm:text-sm font-bold'>
-                      E
+                      A
                     </span>
                   </div>
                   <div>
