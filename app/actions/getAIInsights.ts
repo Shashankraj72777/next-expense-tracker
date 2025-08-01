@@ -50,7 +50,7 @@ export async function getAIInsights(): Promise<AIInsight[]> {
       ];
     }
 
-    const expenseData: ExpenseRecord[] = expenses.map((expense: any) => ({
+    const expenseData: ExpenseRecord[] = expenses.map((expense) => ({
       id: expense.id,
       amount: expense.amount,
       category: expense.category || 'Other',
