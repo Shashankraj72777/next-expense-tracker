@@ -194,7 +194,7 @@ const Guest = () => {
                   </div>
                   <div>
                     <div className='font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base'>
-                      Sarah L.
+                      Yogesh Janghel
                     </div>
                     <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
                       Verified User
@@ -223,7 +223,7 @@ const Guest = () => {
                   </div>
                   <div>
                     <div className='font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base'>
-                      John D.
+                      Nirbhay Raj
                     </div>
                     <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
                       Verified User
@@ -252,7 +252,7 @@ const Guest = () => {
                   </div>
                   <div>
                     <div className='font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base'>
-                      Emily R.
+                      Anna
                     </div>
                     <div className='text-xs sm:text-sm text-gray-500 dark:text-gray-400'>
                       Verified User
