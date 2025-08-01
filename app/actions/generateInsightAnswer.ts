@@ -27,7 +27,7 @@ export async function generateInsightAnswer(question: string): Promise<string> {
       take: 50,
     });
 
-    const expenseData: ExpenseRecord[] = expenses.map((expense) => ({
+    const expenseData: ExpenseRecord[] = expenses.map((expense: any) => ({
       id: expense.id,
       amount: expense.amount,
       category: expense.category || 'Other',
