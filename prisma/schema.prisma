@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -16,24 +15,23 @@ datasource db {
 
 model User {
   id        String   @id @default(uuid())
-  clerkUserId String @unique
+  clerkUserId String   @unique
   email     String   @unique
   name      String?
   imageUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Records   Record[]
+  Records  Record[]
 }
 
 model Record {
   id        String   @id @default(uuid())
   text      String
-  userId    String
   amount    Float
-  category  String @default ("Other")
+  category  String @default("Other")
   date      DateTime @default(now())
+  userId    String
+  user      User    @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
   createdAt DateTime @default(now())
-
-  user      User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
   @@index([userId])
 }

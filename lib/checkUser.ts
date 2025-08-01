@@ -1,8 +1,8 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from '@clerk/nextjs/server';
 
-import { db } from "./db";
+import { db } from './db';
 
-export async function checkUser() {
+export const checkUser = async () => {
   const user = await currentUser();
 
   if (!user) {
@@ -21,11 +21,12 @@ export async function checkUser() {
 
   const newUser = await db.user.create({
     data: {
-        clerkUserId: user.id,
-        name: `${user.firstName} ${user.lastName}`,
-        imageUrl: user.imageUrl,
-        email: user.emailAddresses[0]?.emailAddress,
+      clerkUserId: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      imageUrl: user.imageUrl,
+      email: user.emailAddresses[0]?.emailAddress,
     },
   });
-    return newUser;
-}
+
+  return newUser;
+};
