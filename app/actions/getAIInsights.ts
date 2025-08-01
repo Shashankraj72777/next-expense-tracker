@@ -11,7 +11,6 @@ export async function getAIInsights(): Promise<AIInsight[]> {
       throw new Error('User not authenticated');
     }
 
-    // Get user's recent expenses (last 30 days)
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -25,11 +24,10 @@ export async function getAIInsights(): Promise<AIInsight[]> {
       orderBy: {
         createdAt: 'desc',
       },
-      take: 50, // Limit to recent 50 expenses for analysis
+      take: 50,
     });
 
     if (expenses.length === 0) {
-      // Return default insights for new users
       return [
         {
           id: 'welcome-1',
@@ -52,8 +50,7 @@ export async function getAIInsights(): Promise<AIInsight[]> {
       ];
     }
 
-    // Convert to format expected by AI
-    const expenseData: ExpenseRecord[] = expenses.map((expense: any) => ({
+    const expenseData: ExpenseRecord[] = expenses.map((expense) => ({
       id: expense.id,
       amount: expense.amount,
       category: expense.category || 'Other',
@@ -61,13 +58,11 @@ export async function getAIInsights(): Promise<AIInsight[]> {
       date: expense.createdAt.toISOString(),
     }));
 
-    // Generate AI insights
     const insights = await generateExpenseInsights(expenseData);
     return insights;
   } catch (error) {
     console.error('Error getting AI insights:', error);
 
-    // Return fallback insights
     return [
       {
         id: 'error-1',

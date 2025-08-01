@@ -11,7 +11,6 @@ export async function generateInsightAnswer(question: string): Promise<string> {
       throw new Error('User not authenticated');
     }
 
-    // Get user's recent expenses (last 30 days)
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -25,11 +24,10 @@ export async function generateInsightAnswer(question: string): Promise<string> {
       orderBy: {
         createdAt: 'desc',
       },
-      take: 50, // Limit to recent 50 expenses for analysis
+      take: 50,
     });
 
-    // Convert to format expected by AI
-    const expenseData: ExpenseRecord[] = expenses.map((expense: any) => ({
+    const expenseData: ExpenseRecord[] = expenses.map((expense) => ({
       id: expense.id,
       amount: expense.amount,
       category: expense.category || 'Other',
@@ -37,7 +35,6 @@ export async function generateInsightAnswer(question: string): Promise<string> {
       date: expense.createdAt.toISOString(),
     }));
 
-    // Generate AI answer
     const answer = await generateAIAnswer(question, expenseData);
     return answer;
   } catch (error) {
