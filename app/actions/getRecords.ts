@@ -1,32 +1,3 @@
 'use server';
-import { db } from '@/lib/db';
-import { auth } from '@clerk/nextjs/server';
-import { Record } from '@/types/Record';
-
-async function getRecords(): Promise<{
-  records?: Record[];
-  error?: string;
-}> {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return { error: 'User not found' };
-  }
-
-  try {
-    const records = await db.record.findMany({
-      where: { userId },
-      orderBy: {
-        date: 'desc', // Sort by the `date` field in descending order
-      },
-      take: 10, // Limit the request to 10 records
-    });
-
-    return { records };
-  } catch (error) {
-    console.error('Error fetching records:', error); // Log the error
-    return { error: 'Database error' };
-  }
-}
-
-export default getRecords;
+import { createClient } from '@/lib/supabase/server'; import { Record } from '@/types/Record';
+export default async function getRecords():Promise<{records?:Record[];error?:string}>{const supabase=await createClient();const {data:{user}}=await supabase.auth.getUser();if(!user)return {error:'Please sign in first.'};const {data,error}=await supabase.from('expenses').select('id,text,amount,category,date,created_at').order('date',{ascending:false}).limit(12);if(error)return {error:error.message};return {records:(data||[]).map(r=>({id:r.id,text:r.text,amount:Number(r.amount),category:r.category,date:r.date,userId:user.id,createdAt:new Date(r.created_at)}))};}

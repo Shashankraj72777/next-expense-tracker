@@ -1,8 +1,5 @@
-import { SignUp } from '@clerk/nextjs';
-export default function Page() {
-  return (
-    <div className='flex items-center justify-center min-h-screen'>
-      <SignUp />
-    </div>
-  );
-}
+'use client';
+import Link from 'next/link';
+import { useState } from 'react';
+import { createClient } from '@/lib/supabase/client';
+export default function SignUpPage() { const [error,setError]=useState(''); const [message,setMessage]=useState(''); const [loading,setLoading]=useState(false); async function submit(formData:FormData){setLoading(true);setError('');const email=String(formData.get('email'));const {data,error}=await createClient().auth.signUp({email,password:String(formData.get('password')),options:{emailRedirectTo:`${window.location.origin}/`}});if(error){setError(error.message);setLoading(false)}else if(data.session) window.location.assign('/'); else {setMessage('Check your email to confirm your account, then sign in.');setLoading(false)}} return <main className='grid min-h-screen place-items-center bg-slate-50 p-5 dark:bg-slate-950'><form action={submit} className='w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900'><p className='text-sm font-semibold text-indigo-600'>PENNYWISE</p><h1 className='mt-2 text-2xl font-semibold'>Create your account</h1><label className='mt-6 block text-sm font-medium'>Email<input name='email' type='email' required className='mt-1.5 w-full rounded-xl border p-3 dark:bg-slate-800'/></label><label className='mt-4 block text-sm font-medium'>Password<input name='password' type='password' minLength={8} required className='mt-1.5 w-full rounded-xl border p-3 dark:bg-slate-800'/></label>{error&&<p className='mt-3 text-sm text-rose-600'>{error}</p>}{message&&<p className='mt-3 text-sm text-emerald-600'>{message}</p>}<button disabled={loading} className='mt-6 w-full rounded-xl bg-indigo-600 py-3 font-semibold text-white'>{loading?'Creating account…':'Create account'}</button><p className='mt-4 text-center text-sm text-slate-500'>Already registered? <Link className='text-indigo-600' href='/sign-in'>Sign in</Link></p></form></main>; }

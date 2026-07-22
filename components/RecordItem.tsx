@@ -8,6 +8,7 @@ const getCategoryEmoji = (category: string) => {
   switch (category) {
     case 'Food':
       return '🍔';
+    case 'Transport':
     case 'Transportation':
       return '🚗';
     case 'Shopping':
@@ -16,6 +17,7 @@ const getCategoryEmoji = (category: string) => {
       return '🎬';
     case 'Bills':
       return '💡';
+    case 'Health':
     case 'Healthcare':
       return '🏥';
     default:

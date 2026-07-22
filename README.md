@@ -1,38 +1,23 @@
-Visit my website : https://next-expense-tracker-plum.vercel.app/
+# Pennywise
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+An AI-powered personal expense dashboard built with Next.js, Clerk, Prisma, PostgreSQL, and OpenAI.
 
-## Getting Started
+## What is included
 
-First, run the development server:
+- Modern responsive landing page and authenticated dashboard
+- Clerk authentication with automatic user-profile sync to PostgreSQL
+- Private, per-user expenses with ownership checks on every write
+- AI expense categorization, tailored insights, and questions about recent spending
+- PostgreSQL-ready budget data model for the next budgeting feature
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Run it locally
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Copy `.env.example` to `.env` and fill in the three required services: PostgreSQL, Clerk, and an AI provider.
+2. Apply the database schema: `npx prisma migrate deploy`
+3. Start the app: `npm run dev`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For a new local development database, use `npx prisma migrate dev` instead.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment checklist
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add every value from `.env.example` to your deployment provider (for example Vercel), set `NEXT_PUBLIC_APP_URL` to the production URL, and run the Prisma migration against your production database before deploying.

@@ -1,33 +1,3 @@
 'use server';
-import { db } from '@/lib/db';
-import { auth } from '@clerk/nextjs/server';
-import { revalidatePath } from 'next/cache';
-
-async function deleteRecord(recordId: string): Promise<{
-  message?: string;
-  error?: string;
-}> {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return { error: 'User not found' };
-  }
-
-  try {
-    await db.record.delete({
-      where: {
-        id: recordId,
-        userId,
-      },
-    });
-
-    revalidatePath('/');
-
-    return { message: 'Record deleted' };
-  } catch (error) {
-    console.error('Error deleting record:', error); // Log the error
-    return { error: 'Database error' };
-  }
-}
-
-export default deleteRecord;
+import { revalidatePath } from 'next/cache'; import { createClient } from '@/lib/supabase/server';
+export default async function deleteRecord(id:string):Promise<{message?:string;error?:string}>{const supabase=await createClient();const {data:{user}}=await supabase.auth.getUser();if(!user)return {error:'Please sign in first.'};const {error}=await supabase.from('expenses').delete().eq('id',id).eq('user_id',user.id);if(error)return {error:error.message};revalidatePath('/');return {message:'Expense deleted'};}
